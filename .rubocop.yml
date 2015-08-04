@@ -1,0 +1,32 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'script/**/*'
+    - !ruby/regexp /config\/initializers\/.+_patch\.rb$/
+    - 'test/dummy/bin/**/*'
+    - 'test/dummy/db/schema.rb'
+
+Metrics/LineLength:
+  Max: 120
+  AllowURI: true
+
+Style/EndOfLine:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingBlankLines:
+  EnforcedStyle: final_blank_line
+
+Style/SpecialGlobalVars:
+  Enabled: false
