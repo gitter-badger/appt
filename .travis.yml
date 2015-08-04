@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+  - 2.1.5
+  - 2.2.2
+gemfile:
+  - gemfiles/4.1.gemfile
+  - gemfiles/4.2.gemfile
+bundler_args: --quiet
+script:
+  - bundle exec rake --trace db:create db:migrate test
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql

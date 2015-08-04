@@ -1,0 +1,15 @@
+- unless flash.empty?
+  .container
+
+    - flash.each do |name, msg|
+      - bootstrap_type = 'info'
+      - bootstrap_type = 'danger' if ['alert'].include?(name)
+
+      %div{ class: "alert alert-#{bootstrap_type}"}
+        %button.close{ type: 'button', 'data-dismiss' => 'alert', 'aria-hidden' => 'true'} &times;
+        %strong
+          - if bootstrap_type == 'danger'
+            Warning!
+          - else
+            Heads up!
+        = msg
