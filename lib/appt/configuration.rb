@@ -1,14 +1,25 @@
 module Appt
   # Defines constants and methods related to configuration
   module Configuration
-    VALID_OPTIONS_KEYS = [
-    ].freeze
-
     UNKNOWN_CLASSES = {
       parent_mailer: -> { ActionMailer::Base },
       parent_controller: -> { ::ApplicationController },
       user_class: -> { nil },
     }
+
+    UNKNOWN_CLASSES.each do |key, default|
+      attr_accessor key.to_sym
+
+      define_method(key) do
+        value = instance_variable_get("@#{key}") || UNKNOWN_CLASSES[key.to_sym]
+        value = value.call if value.respond_to?(:call)
+        c = force_to_constant(value)
+        c
+      end
+    end
+
+    VALID_OPTIONS_KEYS = [
+    ].freeze
 
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -25,19 +36,6 @@ module Appt
     # Reset all configuration options to defaults
     def reset
       self
-    end
-
-    UNKNOWN_CLASSES.each do |key, default|
-      attr_accessor key.to_sym
-    end
-
-    UNKNOWN_CLASSES.each do |key, default|
-      define_method(key) do
-        value = instance_variable_get("@#{key}") || UNKNOWN_CLASSES[key.to_sym]
-        value = value.call if value.respond_to?(:call)
-        c = force_to_constant(value)
-        c
-      end
     end
 
     private
