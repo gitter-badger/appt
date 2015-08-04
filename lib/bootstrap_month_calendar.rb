@@ -1,5 +1,5 @@
 class BootstrapMonthCalendar < SimpleCalendar::MonthCalendar
-  def initialize_with_bootstrap(view_context, opts={})
+  def initialize_with_bootstrap(view_context, opts = {})
     opts.reverse_merge!(
       table: { class: 'table calendar' },
       header: { class: 'pagination' },
@@ -28,10 +28,11 @@ class BootstrapMonthCalendar < SimpleCalendar::MonthCalendar
   alias_method_chain :render_header, :bootstrap
 
   def bootstrap_previous_link
-    ->(param, date_range) { content_tag :li, link_to(raw("&laquo;"), param => date_range.first - 1.day) }
+    ->(param, date_range) { content_tag :li, link_to(raw('&laquo;'), param => date_range.first - 1.day) }
   end
 
   def bootstrap_next_link
-    ->(param, date_range) { content_tag :li, link_to(raw("&raquo;"), param => date_range.last + 1.day) }
+    ->(param, date_range) { content_tag :li, link_to(raw('&raquo;'), param => date_range.last + 1.day) }
   end
 end
+

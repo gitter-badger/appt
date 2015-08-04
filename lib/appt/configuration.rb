@@ -7,7 +7,7 @@ module Appt
       user_class: -> { nil },
     }
 
-    UNKNOWN_CLASSES.each do |key, default|
+    UNKNOWN_CLASSES.each do |key, _default|
       attr_accessor key.to_sym
 
       define_method(key) do
@@ -21,9 +21,10 @@ module Appt
     VALID_OPTIONS_KEYS = [
     ].freeze
 
-    attr_accessor *VALID_OPTIONS_KEYS
+    attr_accessor(*VALID_OPTIONS_KEYS)
 
-    # When this module is extended, set all configuration options to their default values
+    # When this module is extended, set all configuration options to their
+    # default values
     def self.extended(base)
       base.reset
     end
@@ -38,15 +39,17 @@ module Appt
       self
     end
 
-    private
-      def force_to_constant(value)
-        if value.is_a?(Class)
-          value = value.name
-        elsif value.is_a?(Symbol)
-          value = value.to_s
-        end
+  private
 
-        value.try(:constantize)
+    def force_to_constant(value)
+      if value.is_a?(Class)
+        value = value.name
+      elsif value.is_a?(Symbol)
+        value = value.to_s
       end
+
+      value.try(:constantize)
+    end
   end
 end
+

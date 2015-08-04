@@ -3,7 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "appt"
+require 'appt'
 
 module Dummy
   class Application < Rails::Application
@@ -22,7 +22,7 @@ module Dummy
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-	# Set default beginning of week to sunday
+    # Set default beginning of week to sunday
     config.beginning_of_week = :sunday
   end
 end

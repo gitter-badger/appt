@@ -7,3 +7,4 @@ class CreateApptCalendars < ActiveRecord::Migration
     end
   end
 end
+

@@ -3,3 +3,4 @@ module Appt
     self.abstract_class = true
   end
 end
+

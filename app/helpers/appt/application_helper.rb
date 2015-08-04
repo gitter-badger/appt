@@ -12,9 +12,10 @@ module Appt
       if value.nil?
         nil
       else
-        #TODO: i18n?
+        # TODO: i18n?
         time_tag(value, "#{time_ago_in_words(value)} ago", title: value.strftime('%m/%d/%Y %I:%M%p'))
       end
     end
   end
 end
+

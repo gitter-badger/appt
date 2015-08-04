@@ -5,3 +5,4 @@ module Appt
     layout 'appt/application'
   end
 end
+

@@ -1,4 +1,4 @@
-require_dependency "appt/base_controller"
+require_dependency 'appt/base_controller'
 
 module Appt
   class HomeController < BaseController
@@ -6,3 +6,4 @@ module Appt
     end
   end
 end
+

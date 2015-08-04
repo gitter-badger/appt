@@ -6,10 +6,7 @@ module WorkhoursSerializer
   def self.load(options)
     options = JSON.load(options)
 
-    if options
-      Workhours::Week.new(options)
-    else
-      nil
-    end
+    Workhours::Week.new(options) if options
   end
 end
+

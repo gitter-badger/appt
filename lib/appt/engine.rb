@@ -3,3 +3,4 @@ module Appt
     isolate_namespace Appt
   end
 end
+
