@@ -1,0 +1,20 @@
+.calendar {
+  table-layout: fixed;
+
+  th,td {
+    width: 14.2857%;
+    h3 {
+      margin: 0 10px 10px 0;
+    }
+  }
+
+  .prev-month, .next-month {
+    background-color: #f5f5f5;
+    color: #cccccc;
+  }
+
+  .today {
+    background-color: $state-info-bg;
+    color: $state-info-text;
+  }
+}
