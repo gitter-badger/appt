@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'bin/**/*'
+    - 'db/migrate/**/*'
     - 'script/**/*'
     - !ruby/regexp /config\/initializers\/.+_patch\.rb$/
     - 'test/dummy/bin/**/*'
