@@ -31,3 +31,7 @@ Style/TrailingBlankLines:
 
 Style/SpecialGlobalVars:
   Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '{}'
