@@ -1,0 +1,12 @@
+- calendar ||= @calendar
+
+= bootstrap_form_for calendar, layout: :horizontal do |f|
+  = f.text_field :name
+  = f.time_zone_select :timezone_name, ActiveSupport::TimeZone.us_zones, default: 'Eastern Time (US & Canada)'
+  = f.text_area :availability_text
+  = f.number_field :resolution_minutes
+  = f.number_field :min_hours
+  = f.number_field :max_days
+  = f.number_field :lock_hours
+  = f.form_group do
+    = f.primary
