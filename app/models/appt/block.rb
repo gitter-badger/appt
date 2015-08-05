@@ -1,5 +1,5 @@
 module Appt
-  class Block < ActiveRecord::Base
+  class Block < CalendarEvent
   end
 end
 
