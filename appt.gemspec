@@ -37,6 +37,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'workhours', '~> 0.2.1'
   s.add_dependency 'simple_calendar', '~> 1.1.0'
   s.add_dependency 'icalendar', '~> 2.3.0'
+  s.add_dependency 'omniauth', '~> 1.1.1'
+  s.add_dependency 'omniauth-google-oauth2', '~> 0.2.6'
 
   s.add_development_dependency 'pg'
   s.add_development_dependency 'pry'
