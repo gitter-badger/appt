@@ -11,25 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804003846) do
+ActiveRecord::Schema.define(version: 20150804234748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "appt_appointment_types", force: :cascade do |t|
+    t.string   "name",             null: false
+    t.integer  "duration_minutes"
+    t.integer  "before_minutes"
+    t.integer  "after_minutes"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "appt_appointments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "calendar_id"
+    t.date     "day",         null: false
+    t.string   "start",       null: false
+    t.string   "end",         null: false
+    t.string   "email"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "phone"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "appt_blocks", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.integer  "calendar_id"
+    t.date     "day",         null: false
+    t.string   "start",       null: false
+    t.string   "end",         null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "appt_calendars", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "availability"
+    t.string   "timezone_name"
+    t.integer  "resolution_minutes"
+    t.integer  "min_hours"
+    t.integer  "max_days"
+    t.integer  "lock_hours"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end
