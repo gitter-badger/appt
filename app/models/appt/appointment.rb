@@ -1,5 +1,5 @@
 module Appt
-  class Appointment < ActiveRecord::Base
+  class Appointment < CalendarEvent
   end
 end
 
