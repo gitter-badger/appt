@@ -35,3 +35,16 @@ Style/SpecialGlobalVars:
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%': '{}'
+
+Lint/Void:
+  Exclude:
+    - 'spec/**/*'
+
+Style/SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 22

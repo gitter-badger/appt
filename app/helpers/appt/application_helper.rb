@@ -2,7 +2,7 @@ module Appt
   module ApplicationHelper
     def title(title = nil)
       if title
-        content_for(:title) { title }
+        content_for(:title){ title }
       else
         content_for?(:title) ? content_for(:title) : nil
       end

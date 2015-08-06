@@ -2,9 +2,9 @@ module Appt
   # Defines constants and methods related to configuration
   module Configuration
     UNKNOWN_CLASSES = {
-      parent_mailer: -> { ActionMailer::Base },
-      parent_controller: -> { ::ApplicationController },
-      user_class: -> { nil },
+      parent_mailer: ->{ ActionMailer::Base },
+      parent_controller: ->{ ::ApplicationController },
+      user_class: ->{ nil },
     }
 
     UNKNOWN_CLASSES.each do |key, _default|
