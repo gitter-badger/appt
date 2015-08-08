@@ -84,6 +84,9 @@ GEM
       sass (>= 3.3.0)
     bootstrap_form (2.3.0)
     builder (3.2.2)
+    bullet (4.14.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
     coderay (1.1.0)
     countries (0.11.5)
       currencies (~> 0.4.2)
@@ -202,6 +205,7 @@ GEM
     tod (2.0.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uniform_notifier (1.9.0)
     workhours (0.2.1)
       tod (~> 2.0)
 
@@ -210,6 +214,7 @@ PLATFORMS
 
 DEPENDENCIES
   appt!
+  bullet
   icalendar-recurrence!
   pg
   pry

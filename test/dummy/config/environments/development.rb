@@ -38,5 +38,15 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.add_footer = true
+    Bullet.stacktrace_includes = ['tod', 'icalendar', 'simple_calendar',
+                                  'workhours', 'phony', 'phony-rails', 'icalendar-recurrence']
+  end
 end
 
