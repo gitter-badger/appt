@@ -18,7 +18,7 @@ module Appt
       # well as handle groups under same id with group_by{ |e| e[:external_id] }
 
       transaction do
-        blocks.where(calendar_id: target.id).destroy_all
+        blocks.where(calendar_id: target.id).delete_all
         today = target.today
         min_date = today - SYNC_BUFFER
         max_date = today + target.max_days.days + SYNC_BUFFER
