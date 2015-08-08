@@ -13,3 +13,4 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'icalendar-recurrence', github: 'paultyng/icalendar-recurrence', branch: 'pt/bugs'
