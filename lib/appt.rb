@@ -19,6 +19,7 @@ require 'workhours_serializer'
 
 require 'appt/engine'
 require 'appt/configuration'
+require 'appt/icalendar_expander'
 
 module Appt
   extend Configuration
