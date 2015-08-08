@@ -1,0 +1,7 @@
+- title 'External Calendars'
+- breadcrumbs
+
+.container
+  = render partial: 'table', locals: { external_calendars: @external_calendars }
+
+  = link_to 'New External Calendar', new_external_calendar_path

@@ -1,0 +1,26 @@
+- calendar ||= nil
+- external_calendar ||= nil
+
+%table.table
+  %thead
+    %tr
+      %th= Appt::Block.human_attribute_name(:name)
+      %th= Appt::Block.human_attribute_name(:day)
+      %th= Appt::Block.human_attribute_name(:start)
+      %th= Appt::Block.human_attribute_name(:end)
+      - if calendar.nil?
+        %th= Appt::Block.human_attribute_name(:calendar)
+      - if external_calendar.nil?
+        %th= Appt::Block.human_attribute_name(:external_calendar)
+  %tbody
+    - blocks.each do |block|
+      %tr
+        %td= link_to block.name, calendar_block_path(block.calendar, block)
+        %td= block.day
+        %td= block.start
+        %td= block.end
+        - if calendar.nil?
+          %td= link_to block.calendar.name, calendar_path(block.calendar)
+        - if external_calendar.nil?
+          %td
+            = link_to block.external_calendar.name, external_calendar_path(block.external_calendar) if block.external_calendar

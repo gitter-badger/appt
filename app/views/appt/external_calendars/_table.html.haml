@@ -1,0 +1,10 @@
+%table.table
+  %thead
+    %tr
+      %th= Appt::ExternalCalendar.human_attribute_name(:name)
+      %th= Appt::ExternalCalendar.human_attribute_name(:url)
+  %tbody
+    - external_calendars.each do |external_calendar|
+      %tr
+        %td= link_to external_calendar.name.blank? ? '<no name>' : external_calendar.name, external_calendar_path(external_calendar)
+        %td= external_calendar.url.truncate(50, omission: "...#{external_calendar.url.last(20)}")

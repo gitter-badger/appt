@@ -1,0 +1,26 @@
+- title @external_calendar.name
+- breadcrumbs do
+  = breadcrumb 'External Calendars', external_calendars_path
+
+.container
+  = bootstrap_form_for :external_calendar_sync, method: :put, layout: :horizontal do |f|
+    = f.form_group do
+      = link_to 'Edit External Calendar', edit_external_calendar_path(@external_calendar), class: 'btn btn-default'
+      = f.button 'Sync Metadata', name: 'method', value: 'sync_metadata', class: 'btn btn-default', type: 'submit'
+    %hr
+    = f.collection_select :calendar_id, Appt::Calendar.order(name: :asc), :id, :name, prompt: 'Select a target calendar...'
+    = f.form_group do
+      = f.button 'Sync Blocks', name: 'method', value: 'sync', class: 'btn btn-default', type: 'submit'
+
+  %hr
+
+  %h3 Calendars
+  = paginate @calendars, param_name: :calendars_page
+  = render partial: 'appt/calendars/table', locals: { calendars: @calendars, external_calendar: @external_calendar }
+  = paginate @calendars, param_name: :calendars_page
+
+  %h3 Blocks
+  = paginate @blocks, param_name: :blocks_page
+  = render partial: 'appt/blocks/table', locals: { blocks: @blocks, external_calendar: @external_calendar }
+  = paginate @blocks, param_name: :blocks_page
+

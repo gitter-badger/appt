@@ -3,3 +3,4 @@
   = navbar_collapse do
     = navbar_group do
       = navbar_item Appt::Calendar.model_name.human(count: 2), calendars_path
+      = navbar_item 'External', external_calendars_path
