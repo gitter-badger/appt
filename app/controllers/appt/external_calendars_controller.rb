@@ -20,7 +20,7 @@ module Appt
 
     def show
       @calendars = @external_calendar.calendars.order(:name).page(params[:calendars_page])
-      @blocks = @external_calendar.blocks.order(:day, :start, :end).page(params[:blocks_page])
+      @blocks = @external_calendar.blocks.includes(:calendar).order(:day, :start, :end).page(params[:blocks_page])
     end
 
     def edit
