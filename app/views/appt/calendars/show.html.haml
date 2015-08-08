@@ -3,12 +3,13 @@
   = breadcrumb 'Calendars', calendars_path
 
 .container
-  - calendar = BootstrapMonthCalendar.new(self, timezone: @calendar.timezone, events: @calendar.appointments)
-
-  - calendar_render = Proc.new do |date, appointments|
-    %h3= date.day
+  = calendar_event_calendar(@calendar.timezone, @appointments + @blocks) do |date, events|
     %ul.list-unstyled
-      - appointments.each do |appointment|
-        %li= link_to appointment.name, location_appointment_path(appointment.location, appointment)
+      - events.each do |event|
+        - name = event.name.truncate(30)
+        - if event.is_a?(Appt::Appointment)
+          %li= link_to name, calendar_appointment_path(event.calendar, event)
+        - elsif event.is_a?(Appt::Block)
+          %li.bg-danger= link_to name, calendar_block_path(event.calendar, event)
 
-  = calendar.render(calendar_render)
+

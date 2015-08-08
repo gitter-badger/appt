@@ -23,6 +23,11 @@ module Appt
     end
 
     def show
+      start_date = params[:start_date] ? Date.parse(params[:start_date]) : @calendar.today
+      start_date = start_date.at_beginning_of_month
+
+      @appointments = @calendar.appointments.where('day >= ? and day <= ?', start_date, start_date.at_end_of_month)
+      @blocks = @calendar.blocks.where('day >= ? and day <= ?', start_date, start_date.at_end_of_month)
     end
 
     def edit
