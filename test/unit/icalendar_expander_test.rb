@@ -56,7 +56,7 @@ module Appt
       s = Date.new(2016, 10, 19)
       e = Date.new(2016, 10, 24)
       calendars = Icalendar.parse(File.read(File.expand_path('../../support/ics/all-day.ics', __FILE__)))
-      events = IcalendarExpander.new(@tz, calendars).events(s, e).to_a
+      events = IcalendarExpander.new(@tz, calendars, include_transparent: true).events(s, e).to_a
 
       assert_equal 4, events.size
       assert_middle_events events

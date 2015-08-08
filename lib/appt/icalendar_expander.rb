@@ -1,10 +1,12 @@
 module Appt
   class IcalendarExpander
-    attr_reader :timezone, :calendars
+    attr_reader :timezone, :calendars, :include_transparent
+    alias_method :include_transparent?, :include_transparent
 
-    def initialize(timezone, calendars)
+    def initialize(timezone, calendars, options = {})
       @timezone = timezone
       @calendars = calendars
+      @include_transparent = options.delete(:include_transparent) || false
     end
 
     def events(min_date, max_date, &block)
@@ -35,6 +37,8 @@ module Appt
     end
 
     def normalize_event(event, occurrence, min_date, max_date, &block)
+      return if event.transp == 'TRANSPARENT' && !@include_transparent
+
       all_day = all_day?(event)
 
       s = normalize_datetime(occurrence.start_time, all_day)
