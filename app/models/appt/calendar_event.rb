@@ -9,7 +9,7 @@ module Appt
     serialize :start, Tod::TimeOfDay
     serialize :end, Tod::TimeOfDay
 
-    belongs_to :calendar
+    # assumes belongs_to :calendar
     validates :calendar, :day, :start, :end, presence: true
 
     def start_local
