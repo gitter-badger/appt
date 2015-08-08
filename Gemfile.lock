@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    appt (0.0.1.beta.2)
+    appt (0.0.1.beta.3)
       activemodel-associations (~> 0.1)
       bootstrap-navbar (~> 2.2)
       bootstrap-sass (~> 3.3, >= 3.3.4)
