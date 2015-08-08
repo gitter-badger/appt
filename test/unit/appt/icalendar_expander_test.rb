@@ -21,7 +21,7 @@ module Appt
     test 'handles singular event' do
       s = Date.new(2015, 8, 22)
       e = Date.new(2015, 8, 23)
-      calendars = Icalendar.parse(File.read(File.expand_path('../../support/ics/singular.ics', __FILE__)))
+      calendars = Icalendar.parse(File.read(File.expand_path('../../../support/ics/singular.ics', __FILE__)))
       events = IcalendarExpander.new(@tz, calendars).events(s, e).to_a
       event = events.first
 
@@ -37,7 +37,7 @@ module Appt
     test 'handles multi-day' do
       s = Date.new(2015, 8, 11)
       e = Date.new(2015, 8, 16)
-      calendars = Icalendar.parse(File.read(File.expand_path('../../support/ics/multi-day.ics', __FILE__)))
+      calendars = Icalendar.parse(File.read(File.expand_path('../../../support/ics/multi-day.ics', __FILE__)))
       events = IcalendarExpander.new(@tz, calendars).events(s, e).to_a
 
       assert_equal 3, events.size
@@ -55,7 +55,7 @@ module Appt
     test 'handles all-day' do
       s = Date.new(2016, 10, 19)
       e = Date.new(2016, 10, 24)
-      calendars = Icalendar.parse(File.read(File.expand_path('../../support/ics/all-day.ics', __FILE__)))
+      calendars = Icalendar.parse(File.read(File.expand_path('../../../support/ics/all-day.ics', __FILE__)))
       events = IcalendarExpander.new(@tz, calendars, include_transparent: true).events(s, e).to_a
 
       assert_equal 4, events.size
@@ -73,7 +73,7 @@ module Appt
     test 'handles recurrence' do
       s = Date.new(2015, 8, 5)
       e = Date.new(2015, 8, 13)
-      calendars = Icalendar.parse(File.read(File.expand_path('../../support/ics/recurrence.ics', __FILE__)))
+      calendars = Icalendar.parse(File.read(File.expand_path('../../../support/ics/recurrence.ics', __FILE__)))
       events = IcalendarExpander.new(@tz, calendars).events(s, e).to_a
 
       assert_equal 2, events.size
