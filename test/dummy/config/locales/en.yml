@@ -20,14 +20,3 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    models:
-      appt/appointment:
-        one: Appointment
-        other: Appointments
-      appt/block:
-        one: Block
-        other: Blocks
-      appt/calendar:
-        one: Calendar
-        other: Calendars
