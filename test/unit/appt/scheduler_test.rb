@@ -61,6 +61,35 @@ module Appt
 
       assert_equal ['01:00:00', '02:30:00'], shifts.map{ |s| s.beginning.to_s }
     end
+
+    test 'exceeds_overlap, overlap 1' do
+      candidate = shift('4:00', '5:00')
+
+      assert @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('5:15', '5:45')])
+    end
+
+    test 'exceeds_overlap, overlap 2, lined up' do
+      @scheduler.overlap = 2
+
+      candidate = shift('4:00', '5:00')
+
+      assert @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30'), shift('3:30', '4:30')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30'), shift('4:30', '5:30')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('5:15', '5:45')])
+    end
+
+    test 'exceeds_overlap, overlap 2, not lined up' do
+      @scheduler.overlap = 2
+
+      candidate = shift('4:00', '5:00')
+
+      assert @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30'), shift('4:15', '4:45')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30'), shift('4:30', '5:30')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('3:30', '4:30')])
+      refute @scheduler.send(:exceeds_overlap?, candidate, [shift('5:15', '5:45')])
+    end
   end
 end
 

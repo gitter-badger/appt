@@ -1,6 +1,6 @@
 module Appt
   class Scheduler
-    attr_accessor :week, :resolution, :duration, :before, :after
+    attr_accessor :week, :resolution, :duration, :before, :after, :overlap
 
     def initialize(week, options = {})
       @week = week
@@ -8,6 +8,7 @@ module Appt
       @duration = options.delete(:duration) || 30.minutes
       @before = options.delete(:before) || 0.minutes
       @after = options.delete(:after) || 0.minutes
+      @overlap = options.delete(:overlap) || 1
     end
 
     def raw_shifts(day, &block)
@@ -41,15 +42,31 @@ module Appt
       end
     end
 
-    def available_shifts(day, conflicts = [], &block)
-      return enum_for(:available_shifts, day, conflicts) unless block_given?
+    def available_shifts(day, conflict_shifts = [], overlap_shifts = [], &block)
+      return enum_for(:available_shifts, day, conflict_shifts, overlap_shifts) unless block_given?
 
-      raw_shifts(day).reject{ |s| conflicts.any?{ |c| c.overlaps?(s) } }.each do |shift|
-        block.call(display_shift(shift))
-      end
+      raw_shifts(day)
+        .reject{ |s| conflicts?(s, conflict_shifts) }
+        .reject{ |s| exceeds_overlap?(s, overlap_shifts) }
+        .each{ |s| block.call(display_shift(s)) }
     end
 
-    # def next_available(start, end, blocks=[])
+  # def next_available(start, end, blocks=[])
+
+  private
+
+    def conflicts?(shift, conflict_shifts)
+      conflict_shifts.any?{ |c| c.overlaps?(shift) }
+    end
+
+    def exceeds_overlap?(shift, overlap_shifts)
+      if overlap == 1
+        conflicts?(shift, overlap_shifts)
+      else
+        overlap_shifts = overlap_shifts.select{ |s| s.overlaps?(shift) }.to_a
+        (overlap_shifts.map{ |s1| overlap_shifts.select{ |s2| s1.overlaps?(s2) }.size }.max || 0) >= overlap
+      end
+    end
   end
 end
 
