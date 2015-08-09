@@ -1,0 +1,6 @@
+- title @appointment_type.name
+- breadcrumbs do
+  = breadcrumb Appt::AppointmentType.model_name.human(count: 2), appointment_types_path
+
+.container
+  = render partial: 'form'

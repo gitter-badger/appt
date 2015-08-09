@@ -1,0 +1,8 @@
+%table.table
+  %thead
+    %tr
+      %th= Appt::AppointmentType.human_attribute_name(:name)
+  %tbody
+    - appointment_types.each do |appointment_type|
+      %tr
+        %td= link_to appointment_type.name, appointment_type_path(appointment_type)

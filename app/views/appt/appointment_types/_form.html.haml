@@ -1,0 +1,9 @@
+- appointment_type ||= @appointment_type
+
+= bootstrap_form_for appointment_type, layout: :horizontal do |f|
+  = f.text_field :name
+  = f.number_field :duration_minutes
+  = f.number_field :before_minutes
+  = f.number_field :after_minutes
+  = f.form_group do
+    = f.primary

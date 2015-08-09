@@ -14,5 +14,17 @@ module Appt
     max_days: 180,
     lock_hours: 24,
   ).find_or_create_by!(name: 'Denver')
+
+  AppointmentType.create_with(
+    duration_minutes: 30,
+    before_minutes: 0,
+    after_minutes: 30,
+  ).find_or_create_by!(name: 'Shirt Fitting')
+
+  AppointmentType.create_with(
+    duration_minutes: 60,
+    before_minutes: 0,
+    after_minutes: 30,
+  ).find_or_create_by!(name: 'Suit Fitting')
 end
 

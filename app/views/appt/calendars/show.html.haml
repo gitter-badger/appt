@@ -10,6 +10,18 @@
     %h3
       = date.day
 
+      - if date >= @start_date && date <= @start_date.at_end_of_month && date >= @calendar.min_schedule_time.to_date
+        - appointment_types = @calendar.appointment_types.select{ |at| @calendar.available_shifts(at, date).any? }
+        - if appointment_types.size > 0
+          .btn-group
+            %button.btn.btn-sm.btn-default.dropdown-toggle{ type: 'button', 'data-toggle': 'dropdown' }
+              .glyphicon.glyphicon-plus
+              %span.caret
+            %ul.dropdown-menu
+              - appointment_types.each do |appointment_type|
+                - if @calendar.available_shifts(appointment_type, date).any?
+                  %li= link_to appointment_type.name, new_calendar_appointment_path(@calendar, appointment_type_id: appointment_type.id, day: date)
+
     %ul.list-unstyled
       - events.each do |event|
         - name = event.name.truncate(30)

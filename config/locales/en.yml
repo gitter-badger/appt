@@ -4,10 +4,12 @@ en:
       appt/appointment:
         one: Appointment
         other: Appointments
+      appt/appointment_type:
+        one: Appointment Type
+        other: Appointment Types
       appt/block:
         one: Block
         other: Blocks
       appt/calendar:
         one: Calendar
         other: Calendars
-

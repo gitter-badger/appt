@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805114046) do
+ActiveRecord::Schema.define(version: 20150809023823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,15 +27,16 @@ ActiveRecord::Schema.define(version: 20150805114046) do
 
   create_table "appt_appointments", force: :cascade do |t|
     t.integer  "calendar_id"
-    t.date     "day",         null: false
-    t.string   "start",       null: false
-    t.string   "end",         null: false
+    t.date     "day",                 null: false
+    t.string   "start",               null: false
+    t.string   "end",                 null: false
     t.string   "email"
     t.string   "firstname"
     t.string   "lastname"
     t.string   "phone"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "appointment_type_id"
   end
 
   create_table "appt_blocks", force: :cascade do |t|
@@ -61,6 +62,14 @@ ActiveRecord::Schema.define(version: 20150805114046) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  create_table "appt_calendars_appointment_types", id: false, force: :cascade do |t|
+    t.integer "calendar_id"
+    t.integer "appointment_type_id"
+  end
+
+  add_index "appt_calendars_appointment_types", ["appointment_type_id"], name: "index_appt_calendars_appointment_types_on_appointment_type_id", using: :btree
+  add_index "appt_calendars_appointment_types", ["calendar_id"], name: "index_appt_calendars_appointment_types_on_calendar_id", using: :btree
 
   create_table "appt_external_calendars", force: :cascade do |t|
     t.string   "url"

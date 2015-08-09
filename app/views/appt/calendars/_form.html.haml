@@ -8,5 +8,6 @@
   = f.number_field :min_hours
   = f.number_field :max_days
   = f.number_field :lock_hours
+  = f.collection_check_boxes :appointment_type_ids, Appt::AppointmentType.all, :id, :name
   = f.form_group do
     = f.primary

@@ -46,7 +46,7 @@ module Appt
   private
 
     def calendar_params
-      params[:calendar].try(:permit, :name, :availability_text, :timezone_name) || {}
+      params[:calendar].try(:permit, :name, :availability_text, :timezone_name, appointment_type_ids: []) || {}
     end
 
     def set_new_calendar

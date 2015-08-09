@@ -5,6 +5,7 @@ module Appt
     has_many :appointments, dependent: :destroy
     has_many :blocks, dependent: :destroy
     has_many :external_calendars, ->{ distinct }, through: :blocks
+    has_and_belongs_to_many :appointment_types, join_table: :appt_calendars_appointment_types
 
     validates :timezone_name, presence: true, inclusion: { in: ActiveSupport::TimeZone.all.map(&:name).freeze }
     validates :name, :availability, presence: true
