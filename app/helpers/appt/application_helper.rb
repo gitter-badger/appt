@@ -20,9 +20,13 @@ module Appt
       end
     end
 
-    def breadcrumb(name, options, html_options = nil, &block)
+    def breadcrumb(name, options = nil, html_options = nil, &block)
       content_tag(:li) do
-        concat link_to name, options, html_options, &block
+        if options
+          concat link_to name, options, html_options, &block
+        else
+          concat name
+        end
       end
     end
 
