@@ -3,7 +3,7 @@ module Appt
     belongs_to :calendar, inverse_of: :appointments
     belongs_to :appointment_type
 
-    validates :appointment_type, presence: true
+    validates :appointment_type, :email, presence: true
 
     def title
       [
