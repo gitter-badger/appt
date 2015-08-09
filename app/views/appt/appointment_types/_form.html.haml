@@ -1,6 +1,8 @@
 - appointment_type ||= @appointment_type
 
 = bootstrap_form_for appointment_type, layout: :horizontal do |f|
+  = f.alert_message "Please fix the following errors below."
+
   = f.text_field :name
   = f.number_field :duration_minutes
   = f.number_field :before_minutes

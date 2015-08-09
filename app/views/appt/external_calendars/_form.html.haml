@@ -1,6 +1,8 @@
 - external_calendar ||= @external_calendar
 
 = bootstrap_form_for external_calendar, layout: :horizontal do |f|
+  = f.alert_message "Please fix the following errors below."
+
   = f.url_field :url
   = f.text_field :name
   = f.form_group do
