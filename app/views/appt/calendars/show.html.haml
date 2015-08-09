@@ -7,6 +7,9 @@
     = link_to 'Edit', edit_calendar_path(@calendar), class: 'btn btn-default'
 
   = calendar_event_calendar(@calendar.timezone, @appointments + @blocks) do |date, events|
+    %h3
+      = date.day
+
     %ul.list-unstyled
       - events.each do |event|
         - name = event.name.truncate(30)

@@ -4,7 +4,6 @@ module Appt
       calendar = BootstrapMonthCalendar.new(self, options.merge(timezone: timezone, events: calendar_events))
 
       calendar_render = proc do |date, events|
-        concat content_tag :h3, date.day
         concat capture(date, events, &block)
       end
 

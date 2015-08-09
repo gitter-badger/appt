@@ -23,11 +23,11 @@ module Appt
     end
 
     def show
-      start_date = params[:start_date] ? Date.parse(params[:start_date]) : @calendar.today
-      start_date = start_date.at_beginning_of_month
+      @start_date = params[:start_date] ? Date.parse(params[:start_date]) : @calendar.today
+      @start_date = @start_date.at_beginning_of_month
 
-      @appointments = @calendar.appointments.where('day >= ? and day <= ?', start_date, start_date.at_end_of_month)
-      @blocks = @calendar.blocks.where('day >= ? and day <= ?', start_date, start_date.at_end_of_month)
+      @appointments = @calendar.appointments.where('day >= ? and day <= ?', @start_date, @start_date.at_end_of_month)
+      @blocks = @calendar.blocks.where('day >= ? and day <= ?', @start_date, @start_date.at_end_of_month)
     end
 
     def edit
@@ -37,7 +37,7 @@ module Appt
       @calendar.attributes = calendar_params
 
       if @calendar.save
-        redirect_to calendar_path(@location), notice: 'Your calendar was updated.'
+        redirect_to calendar_path(@calendar), notice: 'Your calendar was updated.'
       else
         render :edit
       end

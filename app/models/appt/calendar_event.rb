@@ -30,8 +30,6 @@ module Appt
       self.end = start + value.minutes
     end
 
-  private
-
     def shift
       Tod::Shift.new(start, self.end, true)
     end

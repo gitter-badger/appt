@@ -14,4 +14,6 @@
 - else
   %p
     You do not have any calendars yet.
-    = link_to 'Create one.', new_calendar_path
+
+    - if external_calendar.nil?
+      = link_to 'Create one.', new_calendar_path
