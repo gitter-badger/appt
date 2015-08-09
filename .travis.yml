@@ -12,3 +12,6 @@ env:
   - DB=sqlite
   - DB=mysql
   - DB=postgresql
+addons:
+  code_climate:
+    repo_token: 0a20bc52b64df10c299b60f565e4bae3ed78d0abba2b0f7b6ca918f00cb4e673
