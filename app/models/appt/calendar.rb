@@ -44,6 +44,13 @@ module Appt
       scheduler(appointment_type).available_shifts(day, conflicts(day), &block)
     end
 
+    def title
+      [
+        name,
+        'Calendar',
+      ].find{ |s| !s.blank? }
+    end
+
   protected
 
     def conflicts(day)

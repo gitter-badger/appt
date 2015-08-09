@@ -1,4 +1,4 @@
-- title @calendar.name || 'Calendar'
+- title @calendar.title
 - breadcrumbs do
   = breadcrumb 'Calendars', calendars_path
 
@@ -25,7 +25,7 @@
 
     %ul.list-unstyled
       - events.each do |event|
-        - name = event.name.truncate(30)
+        - name = event.title.truncate(30)
         - if event.is_a?(Appt::Appointment)
           %li= link_to name, calendar_appointment_path(event.calendar, event)
         - elsif event.is_a?(Appt::Block)
