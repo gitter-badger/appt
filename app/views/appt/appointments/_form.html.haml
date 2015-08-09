@@ -1,0 +1,8 @@
+- appointment ||= @appointment
+
+= bootstrap_form_for appointment.calendar, appointment, layout: :horizontal do |f|
+  = f.full_name_field :firstname, :lastname
+  = f.email_field :email
+  = f.phone_field :phone
+  = f.form_group do
+    = f.submit

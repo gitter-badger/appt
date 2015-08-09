@@ -1,0 +1,45 @@
+- title 'New Appointment'
+- breadcrumbs do
+  = breadcrumb Appt::Calendar.model_name.human(count: 2), calendars_path
+  = breadcrumb @calendar.title, calendar_path(@calendar)
+  = breadcrumb Appt::Appointment.model_name.human(count: 2)
+
+.container
+  = bootstrap_form_for [@calendar, @appointment] do |f|
+    = f.hidden_field :appointment_type_id
+    = f.hidden_field :day
+
+    - if @appointment.appointment_type_id.nil?
+      = f.collection_select :appointment_type_id, @calendar.appointment_types, :id, :name
+      = f.form_group do
+        = f.primary
+    - elsif @appointment.day.nil?
+      = calendar_event_calendar(@calendar.timezone) do |date|
+        %h3
+          = date.day
+
+          - if date >= @calendar.min_schedule_time.to_date
+            %button.btn.btn-sm.btn-default{ type: 'submit', name: "#{f.object_name}[day]", value: date }
+              .glyphicon.glyphicon-plus
+    - else
+      %h3
+        Available Appointments for
+        = @appointment.day.strftime('%B %e')
+
+      .row
+        .col-sm-2
+          - @appointment.available_shifts.each do |s|
+            .checkbox
+              %label
+                = f.radio_button_without_bootstrap :start, s.beginning
+                = s.beginning.strftime('%l:%M%P')
+
+        .col-sm-10
+          = f.alert_message "Please fix the following errors below."
+
+          = full_name_field f, :firstname, :lastname
+          = f.email_field :email
+          = f.phone_field :phone
+
+          = f.form_group do
+            = f.primary

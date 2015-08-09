@@ -1,0 +1,8 @@
+- title @appointment.title
+- breadcrumbs do
+  = breadcrumb Appt::Calendar.model_name.human(count: 2), calendars_path
+  = breadcrumb @calendar.title, calendar_path(@calendar)
+  = breadcrumb Appt::Appointment.model_name.human(count: 2), calendar_blocks_path
+
+.container
+
