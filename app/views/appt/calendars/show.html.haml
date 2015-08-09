@@ -3,6 +3,9 @@
   = breadcrumb 'Calendars', calendars_path
 
 .container
+  .pull-right
+    = link_to 'Edit', edit_calendar_path(@calendar), class: 'btn btn-default'
+
   = calendar_event_calendar(@calendar.timezone, @appointments + @blocks) do |date, events|
     %ul.list-unstyled
       - events.each do |event|
