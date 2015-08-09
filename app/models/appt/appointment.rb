@@ -7,6 +7,11 @@ module Appt
 
     validates :appointment_type, :email, presence: true
 
+    def available_shifts(&block)
+      # TODO: nil checking?
+      calendar.available_shifts(appointment_type, day, &block)
+    end
+
     def title
       [
         "#{firstname} #{lastname}".strip,
