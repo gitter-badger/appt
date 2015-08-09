@@ -20,6 +20,13 @@ module Appt
       ].find{ |s| !s.blank? }
     end
 
+    def full_shift
+      Tod::Shift.new(
+        shift.beginning - appointment_type.before_minutes.minutes,
+        shift.ending + appointment_type.after_minutes.minutes
+      )
+    end
+
   private
 
     def set_end

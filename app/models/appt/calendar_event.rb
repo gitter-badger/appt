@@ -33,6 +33,17 @@ module Appt
     def shift
       Tod::Shift.new(start, self.end, true)
     end
+    alias_method :full_shift, :shift
+
+    class << self
+      def shifts
+        all.map(&:shift)
+      end
+
+      def full_shifts
+        all.map(&:full_shift)
+      end
+    end
   end
 end
 
