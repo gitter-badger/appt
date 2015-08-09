@@ -5,6 +5,7 @@
 .container
   .pull-right
     = link_to 'Edit', edit_calendar_path(@calendar), class: 'btn btn-default'
+  .clearfix
 
   = calendar_event_calendar(@calendar.timezone, @appointments + @blocks) do |date, events|
     %h3
