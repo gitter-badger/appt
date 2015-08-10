@@ -5,4 +5,28 @@
   = breadcrumb Appt::Appointment.model_name.human(count: 2), calendar_blocks_path
 
 .container
+  = titlebar do
+    .navbar-right.navbar-form
+      = link_to 'Edit', edit_calendar_appointment_path(@appointment.calendar, @appointment), class: 'btn btn-default'
+      = link_to 'Cancel', cancel_calendar_appointment_path(@appointment.calendar, @appointment), class: 'btn btn-danger'
+      = link_to 'Reschedule', reschedule_calendar_appointment_path(@appointment.calendar, @appointment), class: 'btn btn-info'
 
+    = navbar_group do
+      = navbar_item @appointment.customer_title, customer_path(@appointment.email) if @appointment.email
+
+  .row
+    .col-xs-9
+      = @appointment.day.strftime('%A, %B %e, %Y')
+      %br
+      = @appointment.appointment_type.title
+    .col-xs-3.text-right
+      %span.label.label-default
+        = @appointment.appointment_type.duration_minutes
+        min.
+
+  %hr
+
+  = bootstrap_form_for [@appointment.calendar, @appointment], layout: :horizontal do |f|
+    = f.static_control :email
+    = f.static_control :phone
+    = f.static_control :timezone

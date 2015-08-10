@@ -1,6 +1,11 @@
 Appt::Engine.routes.draw do
   resources :calendars do
-    resources :appointments
+    resources :appointments do
+      member do
+        get :reschedule
+        get :cancel
+      end
+    end
     resources :blocks
   end
   resources :external_calendars, path: 'external-calendars'
