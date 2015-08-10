@@ -54,15 +54,19 @@ module Appt
       ].find{ |s| !s.blank? }
     end
 
+    def resolution
+      resolution_minutes.try(:minutes)
+    end
+
   protected
 
     def scheduler(appointment_type)
       Scheduler.new(
         availability,
-        resolution: resolution_minutes.minutes,
-        duration: appointment_type.duration_minutes.minutes,
-        before: appointment_type.before_minutes.minutes,
-        after: appointment_type.after_minutes.minutes,
+        resolution: resolution,
+        duration: appointment_type.duration,
+        before: appointment_type.before,
+        after: appointment_type.after,
         overlap: allowed_overlap,
       )
     end

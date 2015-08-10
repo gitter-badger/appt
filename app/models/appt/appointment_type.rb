@@ -7,6 +7,18 @@ module Appt
 
     validates :duration_minutes, :before_minutes, :after_minutes,
       presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+    def duration
+      duration_minutes.try(:minutes)
+    end
+
+    def before
+      before_minutes.try(:minutes)
+    end
+
+    def after
+      after_minutes.try(:minutes)
+    end
   end
 end
 
