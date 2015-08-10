@@ -12,10 +12,25 @@ module Appt
       calendar.available_shifts(appointment_type, day, &block)
     end
 
+    def full_name
+      "#{firstname} #{lastname}".strip
+    end
+
+    def customer_title
+      [
+        full_name,
+        email,
+        'Customer',
+      ].find{ |s| !s.blank? }
+    end
+
+    def display_shift
+      start && self.end ? "#{start.strftime('%l:%M%P')} - #{self.end.strftime('%l:%M%P')}" : nil
+    end
+
     def title
       [
-        "#{firstname} #{lastname}".strip,
-        email,
+        display_shift,
         'Appointment',
       ].find{ |s| !s.blank? }
     end

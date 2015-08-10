@@ -2,6 +2,8 @@ module Appt
   class ExternalCalendar < ActiveRecord::Base
     SYNC_BUFFER = 1.day
 
+    alias_attribute :title, :name
+
     has_many :blocks, dependent: :destroy
     has_many :calendars, ->{ distinct }, through: :blocks
 

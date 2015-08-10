@@ -2,6 +2,7 @@ module Appt
   module ApplicationHelper
     def title(title = nil)
       if title
+        title = title.send(:title) if title.respond_to?(:title)
         content_for(:title){ title }
       else
         content_for?(:title) ? content_for(:title) : nil

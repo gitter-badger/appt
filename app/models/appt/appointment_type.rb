@@ -1,5 +1,7 @@
 module Appt
   class AppointmentType < ActiveRecord::Base
+    alias_attribute :title, :name
+
     has_many :appointments, dependent: :destroy
     has_and_belongs_to_many :calendars, join_table: :appt_calendars_appointment_types
 

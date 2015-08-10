@@ -1,4 +1,4 @@
-- title @block.title
+- title @block
 - breadcrumbs do
   = breadcrumb Appt::Calendar.model_name.human(count: 2), calendars_path
   = breadcrumb @calendar.title, calendar_path(@calendar)
