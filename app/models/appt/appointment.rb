@@ -2,6 +2,7 @@ module Appt
   class Appointment < CalendarEvent
     belongs_to :calendar, inverse_of: :appointments
     belongs_to :appointment_type
+    delegate :duration, :before, :after, to: :appointment_type
 
     before_validation :set_end
 
@@ -37,15 +38,15 @@ module Appt
 
     def full_shift
       Tod::Shift.new(
-        shift.beginning - appointment_type.before_minutes.minutes,
-        shift.ending + appointment_type.after_minutes.minutes
+        shift.beginning - before,
+        shift.ending + after,
       )
     end
 
   private
 
     def set_end
-      self.end = start + appointment_type.duration_minutes.minutes if appointment_type && start
+      self.end = start + duration if start && duration
     end
   end
 end
