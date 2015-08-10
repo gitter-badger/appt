@@ -10,6 +10,7 @@ module Appt
     validates :timezone_name, presence: true, inclusion: { in: ActiveSupport::TimeZone.all.map(&:name).freeze }
     validates :name, :availability, presence: true
     validates :resolution_minutes, presence: true, inclusion: { in: [5, 10, 15, 20, 30, 60] }
+    validates :allowed_overlap, presence: true, numericality: { greater_than_or_equal_to: 1 }
 
     def availability_text
       availability.try(:export).try(:[], :hours).try(:join, "\n")
@@ -41,7 +42,9 @@ module Appt
     end
 
     def available_shifts(appointment_type, day = today, &block)
-      scheduler(appointment_type).available_shifts(day, conflicts(day), &block)
+      # TODO: should before and after be counted in overlap?
+      scheduler(appointment_type)
+        .available_shifts(day, blocks.where(day: day).full_shifts, appointments.where(day: day).full_shifts, &block)
     end
 
     def title
@@ -53,10 +56,6 @@ module Appt
 
   protected
 
-    def conflicts(day)
-      (blocks.where(day: day) + appointments.where(day: day)).map(&:shift)
-    end
-
     def scheduler(appointment_type)
       Scheduler.new(
         availability,
@@ -64,6 +63,7 @@ module Appt
         duration: appointment_type.duration_minutes.minutes,
         before: appointment_type.before_minutes.minutes,
         after: appointment_type.after_minutes.minutes,
+        overlap: allowed_overlap,
       )
     end
   end
