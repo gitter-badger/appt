@@ -4,6 +4,8 @@
 
 # Appt
 
+[![Join the chat at https://gitter.im/paultyng/appt](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paultyng/appt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 *Appt* is an open source engine for Ruby on Rails.
 
 It's designed to be dropped in to an existing app to provide appointment scheduling features, including:
