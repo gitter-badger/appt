@@ -15,12 +15,7 @@ module Appt
       return enum_for(:raw_shifts, day) unless block_given?
 
       week.hours_on(day).each do |period|
-        start = period.beginning.to_i
-        start = ((start / resolution) + 1) * resolution if start % resolution != 0
-        start += duration * (before.to_f / duration).ceil if before > 0
-        start = Tod::TimeOfDay.from_i(start)
-
-        candidate = Tod::Shift.new(start - before, start + duration + after, true)
+        candidate = first_shift_for_period(period)
 
         while period.shift.contains?(candidate)
           block.call(candidate)
@@ -54,6 +49,15 @@ module Appt
   # def next_available(start, end, blocks=[])
 
   private
+
+    def first_shift_for_period(period)
+      start = period.beginning.to_i
+      start = ((start / resolution) + 1) * resolution if start % resolution != 0
+      start += duration * (before.to_f / duration).ceil if before > 0
+      start = Tod::TimeOfDay.from_i(start)
+
+      Tod::Shift.new(start - before, start + duration + after, true)
+    end
 
     def conflicts?(shift, conflict_shifts)
       conflict_shifts.any?{ |c| c.overlaps?(shift) }
