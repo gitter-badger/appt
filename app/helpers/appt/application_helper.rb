@@ -39,6 +39,19 @@ module Appt
         time_tag(value, "#{time_ago_in_words(value)} ago", title: value.strftime('%m/%d/%Y %I:%M%p'))
       end
     end
+
+    def titlebar(&block)
+      capture do
+        content_tag(:nav, class: 'navbar navbar-default') do
+          content_tag(:div, class: 'container-fluid') do
+            content_tag(:div, class: 'navbar-header') do
+              content_tag(:span, title, class: 'navbar-brand')
+            end +
+              (block_given? ? capture(&block) : '')
+          end
+        end
+      end
+    end
   end
 end
 
