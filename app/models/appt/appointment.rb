@@ -1,6 +1,7 @@
 module Appt
   class Appointment < CalendarEvent
     belongs_to :calendar, inverse_of: :appointments
+    delegate :timezone, :timezone_name, to: :calendar
     belongs_to :appointment_type
     delegate :duration, :before, :after, to: :appointment_type
 
